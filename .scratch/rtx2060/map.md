@@ -21,8 +21,9 @@ item on the 10/10 list is covered by a spec (or ruled out of scope) and nothing 
 
 - **Machine**: RTX 2060 6 GB (TU106), Ryzen 7 5700X3D, one display 2560×1440 @ 180 Hz, macOS 26 Tahoe, OpenCore.
   The stock NullMoth driver is installed through 1401; the OpenCore picker starts macOS with or without it.
-- **Hard constraint**: BAR1 is 256 MB and cannot grow. Turing's resizable-BAR capability offers 64/128/256 MB only.
-  Every design works within it.
+- **Working constraint (unverified on this card)**: BAR1 is 256 MB and cannot grow; Turing's resizable-BAR capability
+  usually offers 64/128/256 MB only. Upstream PR #62's author reports an RTX 2060 exposing 8 GiB, so the baseline
+  records this card's offered BAR sizes; until then, designs assume 256 MB.
 - **Only this card matters.** Hardcoding for TU106 / 6 GB / 256 MB BAR1 is fine; a property check is used where it
   costs nothing, but no effort goes into keeping other cards working.
 - **Fork-only, never upstream.** Work lives on `H-Sami/nvidia-macos-driver`, branch `rtx2060`, pinned to upstream tag
@@ -45,22 +46,24 @@ item on the 10/10 list is covered by a spec (or ruled out of scope) and nothing 
 
 <!-- one line per closed ticket: [title](issues/NN-slug.md): gist -->
 
+- [How BAR1 is spent on a 256 MB card](issues/05-how-bar1-is-spent.md): BAR1 fills with idle kernel mappings of
+  surface VRAM, so the space goes to how the code is arranged, not CPU need; levers listed, counters to measure on Tahoe.
+- [Shader translation and pipeline cost](issues/06-shader-translation-cost.md): translation and NAK run on the
+  calling thread with per-process, rebuild-invalidated caches and blocking cache I/O; Apple compiles once, out of process.
+- [Survey community fixes](issues/04-community-fixes-survey.md): older small-BAR fixes are in 2.5.5; a ranked shortlist
+  from Dora-z, mickys, NvGfx, #399 and PRs #380/#187 covers BAR1, WindowServer, uploads, shader cache, stats and video.
+- [WindowServer's frame cost while compositing](issues/07-windowserver-frame-cost.md): ~20 ms is fixed plugin CPU per
+  frame (per-draw rebinds, a global lock per texture bind, uncached VRAM wrappers), not GPU or flip; profiling plan set.
+- [Exposing GPU utilization to macOS](issues/08-exposing-utilization.md): monitors read `Device Utilization %`; NVRM's
+  existing kernel RM client can sample GPUMON on a thread_call, so no daemon is needed; key choice to verify on Tahoe.
+- [The Turing video path on Tahoe](issues/09-turing-video-path.md): the right Turing codecs load and Safari is served via
+  VTDecoderXPCService; -13 is harmless; gaps are VP9, CPU untiling at 4K, a first-lookup race and one encoder session.
+
 ## Not yet specified
 
-- **Surface memory on a 256 MB BAR1**: which surfaces get BAR1 at all, how long they keep it, and how the rest reach
-  the compositor without the per-frame copy path. Waits on how BAR1 is spent, the community survey and the baseline.
-- **WindowServer frame cost at 180 Hz**: what to change in the plugin's compositor path so a frame fits in 5.5 ms;
-  how frames are paced to the display.
-- **Shader warm-up**: whether to share, persist or precompile translations so login, app launch and Settings icons
-  stop paying for them; moving translation off the thread that waits for it.
-- **Utilization design**: where the GPUMON sampling runs (kext client, daemon, plugin) and which
-  `PerformanceStatistics` keys Activity Monitor and iStat read.
-- **Video decode**: whether the prebuilt decoder libraries can be kept or must be replaced; VP9; decode in sandboxed
-  apps; the Turing copy-engine failure.
-- **Video encode**: whether Turing NVENC holds up through VideoToolbox clients (OBS, HandBrake, FaceTime, screen
-  sharing).
 - **Metal gaps**: which real apps fail or render wrong on this card, once the desktop is smooth enough to tell.
-- **Display at 180 Hz**: whether the 2560×1440 @ 180 Hz mode (DisplayPort bandwidth, DSC, 10-bit) is driven right.
+- **Display at 180 Hz**: whether the 2560×1440 @ 180 Hz mode (DisplayPort bandwidth, DSC, 10-bit) is driven right, and
+  how frames are paced to it once a WindowServer frame fits in 5.5 ms.
 - **Keeping up with upstream**: when and how to rebase `rtx2060` onto later upstream tags without losing comparable
   measurements.
 
