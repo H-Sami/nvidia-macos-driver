@@ -69,6 +69,9 @@ item on the 10/10 list is covered by a spec (or ruled out of scope) and nothing 
 - [Build the fork from source on Tahoe](issues/03-build-fork-on-tahoe.md): `build/rtx2060/build.sh` builds all but
   NVRM with Command Line Tools; NVRM and other unbuildable parts come from 2.5.5; boots with Metal 3, but WindowServer
   CPU runs up to 2× stock in desktop animations (ticket 19).
+- [Local build costs WindowServer more CPU than stock](issues/19-local-build-windowserver-cpu.md): not the build;
+  a new translator file starts with an empty SPIR-V cache, so the first session retranslates CA's shaders. Warm, local
+  matches stock. Warm up before comparing builds; drag-small fps (-8%) to recheck on a fresh boot.
 
 ## Not yet specified
 
