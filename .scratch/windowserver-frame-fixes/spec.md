@@ -164,3 +164,7 @@ with evidence; the owner decides, the spec never relaxes its target.
 - Work happens on Tahoe only, on the `rtx2060` branch. Every reinstall of a changed translator empties the SPIR-V cache,
   which is why the warm-up is mandatory. Plugin-only rebuilds keep the translator's hash, but the warm-up still runs.
 - Claude runs every harness and sudo step; the owner only reboots (fresh-boot recheck in step 0).
+
+## Progress
+
+<!-- one entry per ticket: run folder, headline numbers against the step-0 baseline, verdict -->
