@@ -31,8 +31,10 @@ item on the 10/10 list is covered by a spec (or ruled out of scope) and nothing 
 - **Everything is fair game**: plugin, translator, NVK patch, kexts, and the prebuilt video libraries if they block
   video. Kext changes stay to what measurements prove necessary; the picker's "start once without NVIDIA driver"
   entry is the way back from a bad kext.
-- **Where work happens**: Claude Code on the Tahoe install builds, installs and measures. This Windows clone plans and
-  reads code. HITL tasks are run by the owner on Tahoe.
+- **Where work happens**: one machine, dual-booting Windows 11 and Tahoe, so only one OS runs at a time. Claude Code on
+  Tahoe builds, installs and measures; on Windows it plans and reads code. HITL tasks are run by the owner on Tahoe.
+  Nothing runs in parallel across the two: a Tahoe ticket and a Windows ticket never overlap, and a measurement run
+  has the machine to itself. Group Tahoe work into one boot where possible, since every switch is a reboot.
 - **Measure, don't feel**: every spec's acceptance target is a number from the harness, compared with the stock
   baseline.
 - **Skills**: `research` for research tickets; `diagnosing-bugs` for anything profiling a hitch or slowdown;
