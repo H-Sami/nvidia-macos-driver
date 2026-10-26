@@ -49,7 +49,12 @@ for s in drive launch vt; do
 done
 
 if [ $SUDO = 1 ]; then
-    sudo -v && { while true; do sudo -n true; sleep 50; kill -0 $$ 2>/dev/null || exit; done & }
+    # asked for root and not given it: stop rather than quietly run without the spindumps and samples
+    if ! sudo -v; then
+        echo "--sudo needs the password typed in a terminal (Terminal.app or iTerm, not Claude's ! prompt)."
+        rm -rf "$RUN"; exit 1
+    fi
+    while true; do sudo -n true; sleep 50; kill -0 $$ 2>/dev/null || exit; done &
 fi
 root() { sudo -n true 2>/dev/null; }
 TRUSTED="$("$BIN/drive" trusted)"
