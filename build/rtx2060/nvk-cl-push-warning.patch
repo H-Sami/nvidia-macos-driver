@@ -1,0 +1,18 @@
+--- a/src/nouveau/headers/nv_push.h
++++ b/src/nouveau/headers/nv_push.h
+@@ -132,6 +132,7 @@
+     * vk_meta_draw_volume) reached here with an empty method and aborted Chess,
+     * mediaanalysisd and several video apps.  Warn once and continue, as the
+     * stale rasterization-samples assert in nvk_cmd_draw.c was downgraded. */
++#ifndef __OPENCL_VERSION__
+    if (last_count == 0) {
+       static int warned;
+       if (!warned) {
+@@ -139,6 +140,7 @@
+          fprintf(stderr, "nvk: empty push method header (count 0); continuing\n");
+       }
+    }
++#endif
+ }
+ 
+ static inline void
