@@ -63,6 +63,9 @@ item on the 10/10 list is covered by a spec (or ruled out of scope) and nothing 
 - [Write the measurement harness](issues/01-measurement-harness.md): `tools/rtx2060/run.sh` records the 10/10 list
   into `~/rtx2060-runs/`; it needs Accessibility, Safari's Apple Events JavaScript and `--sudo` for a full run; first
   smoke numbers: 4K H.264 decode 44 fps, Dock and Mission Control ~66 fps.
+- [Capture the stock baseline](issues/02-stock-baseline.md): every desktop scenario misses 180 Hz (bursts 63-120
+  fps, 15-window drag 19.7 ms of WindowServer CPU per frame); 87,892 surface refusals in 30 minutes of normal use; first
+  launches 2.6-3.8 s; 4K H.264 decodes at 45 fps; no utilization keys. Runs in `baseline/`.
 
 ## Not yet specified
 

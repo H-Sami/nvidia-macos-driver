@@ -1,0 +1,1 @@
+"nvrm-gpu-profile" = {"class-3d"=50583,"class-compute"=50624,"generation"="Turing","class-copy"=50613,"video-layout"="classic","impl"=6,"class-nvenc"=50359,"arch"=352,"chip"="TU106","scanout"="by-handle","vram-mb"=6144,"native-shaders"="none","class-nvdec"=50352,"bar1-mb"=256}

@@ -1,0 +1,16 @@
+0	/Library/GPUBundles/nvmtl/aircache
+1416	/Users/pc/Library/Containers/com.apple.Photos/Data/Library/Caches/nvmtl
+1416	/Users/pc/Library/Containers/com.apple.wallpaper.extension.legacy/Data/Library/Caches/nvmtl
+14676	/Users/pc/Library/Caches/nvmtl/spvcache
+22092	/Users/pc/Library/Containers/com.apple.Displays-Settings.extension/Data/Library/Caches/nvmtl
+23624	/Users/pc/Library/Containers/com.apple.wallpaper.extension.dynamic/Data/Library/Caches/nvmtl
+28184	/var/folders/hj/mnb9lsqs69sbkxgdt578dj2c0000gn/C/nvmtl/aircache
+30904	/Users/pc/Library/Containers/com.apple.Safari/Data/Library/Caches/nvmtl
+383484	/Users/pc/Library/Containers/com.apple.mediaanalysisd/Data/Library/Caches/nvmtl
+390588	/Users/pc/Library/Caches/nvmtl/aircache
+5288	/var/folders/hj/mnb9lsqs69sbkxgdt578dj2c0000gn/C/nvmtl/spvcache
+6000	/Users/pc/Library/Containers/com.apple.notificationcenterui/Data/Library/Caches/nvmtl
+6980	/Users/pc/Library/Containers/com.apple.Notes/Data/Library/Caches/nvmtl
+6980	/Users/pc/Library/Containers/com.apple.TextEdit/Data/Library/Caches/nvmtl
+6996	/Users/pc/Library/Containers/com.apple.Photos.PhotosReliveWidget/Data/Library/Caches/nvmtl
+mesa-disk-cache /Users/pc/.cache/mesa_shader_cache

@@ -1,0 +1,7 @@
+bar1: BAR1 is 64 MB; will resize it to 256 MB
+bar1: PLACED — BAR1 256 MB live at 0x7fe0000000
+bar1: Resizable BAR capability @0xbb0 says BAR1 = 64 MB (sizes supported mask 0x1c0)
+bar1: dropping stale aperture 0x824000000+0x2000000
+bar1: host bridge 64-bit window 0x820000000-0x7fffffffff (ACPI _CRS), CPU reaches 48 bits
+bar1: placing BAR1 256 MB @0x7fe0000000, BAR3 32 MB @0x7ff0000000, root port window 0x7fe0000000-0x7ff1ffffff (was 0x26012001 00000008/00000008)
+bar1: resized BAR1 to 256 MB

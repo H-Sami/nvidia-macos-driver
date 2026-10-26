@@ -1,0 +1,20 @@
+{
+ "end.nvaccel_surface_gpu_wait_max_us": 40546,
+ "end.nvaccel_vm_alloc": 289,
+ "end.nvaccel_vm_refused": 0,
+ "end.nvrm_kms_timer_depth": 0,
+ "end.nvrm_kms_timer_max_depth": 4,
+ "end.nvrmfb_flip_latch_max_us": 16437,
+ "end.nvrmfb_flip_us_max": 17074,
+ "end.nvrmfb_vram_budget_bytes": 236650496,
+ "end.nvrmfb_vram_display_bytes": 15007744,
+ "end.nvrmfb_vram_mapped_bytes": 122224640,
+ "login.flips": 321,
+ "login.seconds_over_50pct_cpu": 5,
+ "login.vm_refused": 0,
+ "login.windowserver_cpu_pct_max": 148.0,
+ "login.windowserver_cpu_seconds": 6.25,
+ "run.accessibility": 0,
+ "run.panel_hz": 180.0,
+ "run.root": 0
+}

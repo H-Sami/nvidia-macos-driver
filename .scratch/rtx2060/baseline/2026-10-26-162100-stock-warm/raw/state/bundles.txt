@@ -1,0 +1,6 @@
+/Library/GPUBundles/NVMTLDriver.bundle 0.1
+/Library/GPUBundles/NVIDIAShared.bundle 1.0
+/Library/Extensions/NVAccel.kext 2.5.5
+/Library/Extensions/NVRM.kext 2.5.5
+/Library/Extensions/NVRMAGDC.kext 2.5.5
+/Library/Extensions/NVRMFB.kext 2.5.5

@@ -1,0 +1,39 @@
+[16:21:00] run folder /Users/pc/rtx2060-runs/2026-10-26-162100-stock-warm
+[16:21:07] state
+[16:21:16] desktop (panel 180.00 Hz, accessibility 1)
+[16:21:28]   idle done
+[16:21:45]   drag-small done
+[16:22:01]   drag-large done
+[16:22:25]   drag-15-windows done
+[16:22:43]   dock-sweep done
+[16:23:00]   dock-minimize done
+[16:23:16]   mission-control done
+[16:23:35]   safari-scroll done
+[16:23:36] launch
+[16:23:42]   com.apple.TextEdit first: {"app":"com.apple.TextEdit","process_ms":300.89999999999998,"window_ms":2729.5}
+[16:23:47]   com.apple.TextEdit second: {"app":"com.apple.TextEdit","process_ms":56.600000000000001,"window_ms":792.5}
+[16:23:55]   com.apple.calculator first: {"app":"com.apple.calculator","process_ms":552.79999999999995,"window_ms":3248.5999999999999}
+[16:24:00]   com.apple.calculator second: {"app":"com.apple.calculator","process_ms":58.299999999999997,"window_ms":986.5}
+[16:24:07]   com.apple.ActivityMonitor first: {"app":"com.apple.ActivityMonitor","process_ms":515.79999999999995,"window_ms":2644}
+[16:24:12]   com.apple.ActivityMonitor second: {"app":"com.apple.ActivityMonitor","process_ms":48.200000000000003,"window_ms":762.70000000000005}
+[16:24:20]   com.apple.systempreferences first: {"app":"com.apple.systempreferences","process_ms":788,"window_ms":3306.8000000000002}
+[16:24:26]   com.apple.systempreferences second: {"app":"com.apple.systempreferences","process_ms":54.200000000000003,"window_ms":1455.5999999999999}
+[16:24:33]   com.apple.Photos first: {"app":"com.apple.Photos","process_ms":932.29999999999995,"window_ms":2726.1999999999998}
+[16:24:38]   com.apple.Photos second: {"app":"com.apple.Photos","process_ms":80.5,"window_ms":759.29999999999995}
+[16:24:47]   com.apple.Safari first: {"app":"com.apple.Safari","process_ms":1049.3,"window_ms":3925.5}
+[16:24:52]   com.apple.Safari second: {"app":"com.apple.Safari","process_ms":86.099999999999994,"window_ms":1192.7}
+[16:24:54] video
+[16:25:01]   encode h264: {"codec":"h264","encode_fps":158,"encoder_id":"com.nvmtl.videoencoder.avc.nvenc","failures":0,"file":"\/Users\/pc\/rtx2060-runs\/2026-10-26-162100-stock-warm\/raw\/video\/encode-h264.mov","fps_target":60,"frames_in":720,"frames_out":720,"hardware":true,"hardware_session_status":0,"keyframes":12,"metal_device":"NVIDIA GeForce RTX 2060 (NVMTL over NVIDIA GeForce RTX 2060 (NVK TU106-A))","size":"3840x2160","writer_error":null}
+[16:25:09]   encode hevc: {"codec":"hevc","encode_fps":110.59999999999999,"encoder_id":"com.nvmtl.videoencoder.hevc.nvenc","failures":0,"file":"\/Users\/pc\/rtx2060-runs\/2026-10-26-162100-stock-warm\/raw\/video\/encode-hevc.mov","fps_target":60,"frames_in":720,"frames_out":720,"hardware":true,"hardware_session_status":0,"keyframes":12,"metal_device":"NVIDIA GeForce RTX 2060 (NVMTL over NVIDIA GeForce RTX 2060 (NVK TU106-A))","size":"3840x2160","writer_error":null}
+[16:25:20]   encode hevc10: {"codec":"hevc10","encode_fps":78.599999999999994,"encoder_id":"com.nvmtl.videoencoder.hevc.nvenc","failures":0,"file":"\/Users\/pc\/rtx2060-runs\/2026-10-26-162100-stock-warm\/raw\/video\/encode-hevc10.mov","fps_target":60,"frames_in":720,"frames_out":720,"hardware":true,"hardware_session_status":0,"keyframes":12,"metal_device":"NVIDIA GeForce RTX 2060 (NVMTL over NVIDIA GeForce RTX 2060 (NVK TU106-A))","size":"3840x2160","writer_error":null}
+[16:25:37]   decode h264: {"codec":"avc1","decode_fps":45.5,"failures":0,"file":"\/Users\/pc\/rtx2060-runs\/.clips\/h264.mov","frames":720,"hardware":true,"metal_device":"NVIDIA GeForce RTX 2060 (NVMTL over NVIDIA GeForce RTX 2060 (NVK TU106-A))","worst_frame_ms":71.799999999999997}
+[16:25:51]   play h264: {"content_fps":60,"error":null,"file":"\/Users\/pc\/rtx2060-runs\/.clips\/h264.mov","frames_dropped":0,"frames_shown":403,"seconds":10.0009,"shown_fps":40.299999999999997,"status":1}
+[16:25:54]   decode hevc: {"codec":"hvc1","decode_fps":343,"failures":0,"file":"\/Users\/pc\/rtx2060-runs\/.clips\/hevc.mov","frames":720,"hardware":true,"metal_device":"NVIDIA GeForce RTX 2060 (NVMTL over NVIDIA GeForce RTX 2060 (NVK TU106-A))","worst_frame_ms":53.100000000000001}
+[16:26:04]   play hevc: {"content_fps":60,"error":null,"file":"\/Users\/pc\/rtx2060-runs\/.clips\/hevc.mov","frames_dropped":0,"frames_shown":589,"seconds":10.0009,"shown_fps":58.899999999999999,"status":1}
+[16:26:08]   decode hevc10: {"codec":"hvc1","decode_fps":263,"failures":0,"file":"\/Users\/pc\/rtx2060-runs\/.clips\/hevc10.mov","frames":720,"hardware":true,"metal_device":"NVIDIA GeForce RTX 2060 (NVMTL over NVIDIA GeForce RTX 2060 (NVK TU106-A))","worst_frame_ms":77.900000000000006}
+[16:26:18]   play hevc10: {"content_fps":60,"error":null,"file":"\/Users\/pc\/rtx2060-runs\/.clips\/hevc10.mov","frames_dropped":0,"frames_shown":586,"seconds":10.0009,"shown_fps":58.600000000000001,"status":1}
+[16:26:32]   safari h264: {"play":"ok","callbacks":574,"presented":596,"media_s":9.95,"wall_s":9.95,"max_gap_ms":34,"gaps_over_2":0,"visibility":"visible","total":1,"dropped":0,"time":10.001066934000274,"paused":false,"error":null,"width":3840,"height":2160}
+[16:26:43]   safari hevc: {"play":"ok","callbacks":582,"presented":600,"media_s":10.049999999999999,"wall_s":10.05,"max_gap_ms":34,"gaps_over_2":0,"visibility":"visible","total":1,"dropped":0,"time":10.109814978999875,"paused":false,"error":null,"width":3840,"height":2160}
+[16:26:55]   safari hevc10: {"play":"ok","callbacks":597,"presented":603,"media_s":10.066666666666666,"wall_s":10.066,"max_gap_ms":34,"gaps_over_2":0,"visibility":"visible","total":1,"dropped":0,"time":10.115360701999965,"paused":false,"error":null,"width":3840,"height":2160}
+[16:26:55] stats
+[16:26:56] summary: /Users/pc/rtx2060-runs/2026-10-26-162100-stock-warm/summary.md
