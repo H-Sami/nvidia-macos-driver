@@ -144,7 +144,8 @@ package() {
   { echo "rtx2060 $(cat out/COMMIT) on v2.5.5, built $(date '+%Y-%m-%d %H:%M') with $(xcrun clang --version | head -1)"
     echo "NVRM, codecs, NVIDIAShared, Vulkan loader, air-runtime and firmware from the 2.5.5 release"; } > "$P/BUILD-INFO"
   ( cd "$P" && grep -v 'libvulkan_nouveau.dylib.syms' MANIFEST.txt > MANIFEST.tmp && mv MANIFEST.tmp MANIFEST.txt
-    find . -type f ! -name SHA256SUMS ! -name .DS_Store | sed 's#^\./##' | LC_ALL=C sort | xargs -I{} shasum -a 256 {} > SHA256SUMS
+    find . -type f ! -name SHA256SUMS ! -name .DS_Store | sed 's#^\./##' | LC_ALL=C sort | while IFS= read -r f; do shasum -a 256 "$f"; done > "$W/pkg/SHA256SUMS"
+    mv "$W/pkg/SHA256SUMS" SHA256SUMS
     shasum -a 256 --strict -c SHA256SUMS --quiet )
   say "package $(cat out/COMMIT): $P"
   say "install: cd $P && sudo ./install.sh && sudo shutdown -r now"
