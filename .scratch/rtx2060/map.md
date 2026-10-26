@@ -72,6 +72,9 @@ item on the 10/10 list is covered by a spec (or ruled out of scope) and nothing 
 - [Local build costs WindowServer more CPU than stock](issues/19-local-build-windowserver-cpu.md): not the build;
   a new translator file starts with an empty SPIR-V cache, so the first session retranslates CA's shaders. Warm, local
   matches stock. Warm up before comparing builds; drag-small fps (-8%) to recheck on a fresh boot.
+- [Choose the WindowServer per-frame fixes](issues/12-windowserver-frame-fixes.md): profile shows 18.8 ms/frame
+  in a 15-window drag, ~8 ms of it driver (descriptors, uncached VRAM imports) plus their frees on the worker; spec:
+  import cache, mickys' descriptor mask, NvGfx `bd09e42`, then re-profile until the driver is under 1 ms/frame.
 
 ## Not yet specified
 
