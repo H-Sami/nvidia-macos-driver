@@ -1,7 +1,7 @@
 # Build the fork from source on Tahoe
 
 Type: task
-Status: open
+Status: resolved
 Assignee: H-Sami
 Blocked by:
 
@@ -53,3 +53,35 @@ Tahoe; the owner reboots.
   - Toolchain, all in `~/rtx2060-build`, no sudo: rustup stable 1.99.1, bindgen 0.73.2, cbindgen 0.29.4,
     conda-forge (micromamba) Python 3.12 + Meson 1.12.1, and LLVM/clang/libclc/llvm-spirv 22 to build `mesa_clc`
     (NVK needs it), glslang 16.6.0.
+- **Booted, 2026-10-26** (package from `b21636b`): all four kexts load at 2.5.5; `system_profiler` reports Metal 3
+  for the RTX 2060 (NVMTL over NVK TU106-A) at 2560×1440. Installed files match the package's `SHA256SUMS`, except
+  `/Library/Extensions/NVAccel.kext`, which is the `kexts/26` build as intended (the manifest lists the 15 build at
+  that path), and the four files under `/Library/NullMoth`, which need root to read.
+- **Measured** (`~/rtx2060-runs/2026-10-26-172613-local-cold` against `baseline/2026-10-26-154330-stock-cold`):
+  video decode, encode and playback, first and second app launches, and the kernel counters match stock. Flips per
+  scenario match too, except the small-window drag (117 → 102 fps). **WindowServer CPU does not match**: drag-small
+  88 → 186%, drag-15-windows 117 → 143%, drag-large 89 → 110%, Mission Control 18 → 82%, Dock minimize 30 → 55%.
+  Stock repeats within a few percent (stock-warm: drag-small 88.1%, drag-15 114.4%), so this is the build, not noise.
+  The kexts are byte-identical or nearly so, and ticket 07 puts WindowServer's frame cost in the plugin, so the cause
+  is in what runs inside WindowServer: translator, plugin or NVK. Translator and plugin use upstream's release recipes
+  (`build/build_xlate_release.sh`, `build/build_plugin_release.sh`; Rust 1.99.1 here, 1.98.1 there). NVK has no
+  published recipe and differs most: 610 headers, the `nv_push.h` patch, and a dylib 0.6 MB larger than the release.
+
+## Answer
+
+Yes, except NVRM. `build/rtx2060/build.sh all` builds the fork from `rtx2060` with Command Line Tools only (Apple clang
+21, SDK 26.5; Rust 1.99.1, Meson 1.12.1, LLVM 22 for `mesa_clc`, all in `~/rtx2060-build`, no sudo) and packages it.
+
+- **Built here**: translator, plugin, NVK (on the 610.57.04 headers, plus `build/rtx2060/nvk-cl-push-warning.patch`),
+  NVAccel 15 and 26, NVRMFB, NVRMAGDC. NVAccel and NVRMFB come out byte-identical to 2.5.5.
+- **Copied from the 2.5.5 release**: NVRM (its RM and NVKMS archives have no published recipe; see
+  [Make NVRM buildable](18-make-nvrm-buildable.md)), the codec dylibs, NVIDIAShared, the Vulkan loader,
+  air-opt/air-runtime, the GSP firmware and `nvrm610.conf`.
+- **Install and back to stock**: both commands are in the header of `build/rtx2060/build.sh`. Install with
+  `cd ~/rtx2060-build/pkg/pkgroot && sudo ./install.sh && sudo shutdown -r now`; for stock, run the same from
+  `~/rtx2060-build/release/x/pkgroot`, or first pick "start once without NVIDIA driver" in OpenCore.
+- **Boot**: the build from `b21636b` loads all four kexts and reports Metal 3 for the RTX 2060.
+
+It does not yet behave fully like stock. Video, launches and kernel counters match, but WindowServer burns up to twice
+the CPU in desktop animations (drag-small 88 → 186%). That moves to
+[Local build costs WindowServer more CPU than stock](19-local-build-windowserver-cpu.md).

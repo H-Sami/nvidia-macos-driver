@@ -66,6 +66,9 @@ item on the 10/10 list is covered by a spec (or ruled out of scope) and nothing 
 - [Capture the stock baseline](issues/02-stock-baseline.md): every desktop scenario misses 180 Hz (bursts 63-120
   fps, 15-window drag 19.7 ms of WindowServer CPU per frame); 87,892 surface refusals in 30 minutes of normal use; first
   launches 2.6-3.8 s; 4K H.264 decodes at 45 fps; no utilization keys. Runs in `baseline/`.
+- [Build the fork from source on Tahoe](issues/03-build-fork-on-tahoe.md): `build/rtx2060/build.sh` builds all but
+  NVRM with Command Line Tools; NVRM and other unbuildable parts come from 2.5.5; boots with Metal 3, but WindowServer
+  CPU runs up to 2× stock in desktop animations (ticket 19).
 
 ## Not yet specified
 
