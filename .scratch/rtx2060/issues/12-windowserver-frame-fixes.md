@@ -28,10 +28,10 @@ thread 85% idle).
 
 The spec:
 
-- **Targets** (warm runs, against step 0): drag-small and drag-large main thread under 5.5 ms per frame; drag-15-windows
-  driver share of the main thread from ~8.1 to at most 2 ms per frame, and the worker's import frees mostly gone. Exit
-  when both hold and the driver's main-thread share in drag-small is under 1 ms. WindowServer's own 5.8 ms puts
-  15 windows at 180 Hz beyond the driver, so fps and gaps are reported, not required; pacing goes to the 180 Hz spec.
+- **Targets** (warm runs, against step 0): every drag scenario, 15 windows included, holds 180 Hz: WindowServer's
+  main thread under 5.5 ms per frame and no gap over 11 ms within the burst. Exit only when that holds. Since
+  WindowServer's own work alone is 5.8 ms in drag-15-windows, the spec has to find out what of it the driver causes;
+  if some of it proves to be WindowServer's alone, the spec reports that with evidence and the owner decides, rather than the target being relaxed in the spec.
 - **Method**: one lever per commit, no runtime toggles; a `--warmup` pass then a measured `--only desktop` run after
   each, logged in the spec. Guard: no desktop scenario over 3% worse in fps or WindowServer CPU per frame. NvGfx and
   mickys changes are cherry-picked as they are.
@@ -43,8 +43,9 @@ The spec:
   `nvaccel_vm_*` and VRAM counters must not rise. Today's cache (`plugin/NVMTLDevice.m`) is weak and keeps only
   failed imports.
 - **Step 2**: mickys' descriptor-mask fix. **Step 3**: NvGfx `bd09e42`.
-- **Step 4**: re-profile and loop on the largest remaining driver cost (main or worker thread) until the exit holds,
-  each pass also checking how much of WindowServer's own time the driver causes. Kext levers become tickets blocked by
+- **Step 4**: re-profile and loop on the largest remaining cost (main or worker thread) until the exit holds. Breaking
+  down WindowServer's own 5.8 ms is part of the loop, not a side check: IOSurface lock/seed traffic, waits blamed on
+  Core Animation, slower CA paths chosen because of what the plugin reports. Kext levers become tickets blocked by
   [Make NVRM buildable](18-make-nvrm-buildable.md).
 - **Out**: NvGfx `18996e2` and `c73ea10` (measured ~0), batching kernel calls at commit (~0.1 ms), NVRM page-table
   zeroing (kext; the cache removes most calls). Keeping the composited frame in VRAM and submit-ahead with host copies
