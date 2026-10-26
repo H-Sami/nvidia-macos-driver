@@ -37,3 +37,19 @@ Tahoe; the owner reboots.
 - **Decided with the owner**: NVRM is copied from the 2.5.5 release; everything else is built here. Making NVRM
   buildable becomes its own ticket, wanted only once a spec needs an NVRM change.
 - The stock baseline is captured, so installing a local build no longer puts it at risk.
+- **Built, 2026-10-26** (`build/rtx2060/build.sh all`, commit `b21636b`): everything but NVRM builds with Command Line
+  Tools (Apple clang 21, SDK 26.5); no Xcode needed. Against the 2.5.5 release:
+  - NVAccel 15 and 26, and NVRMFB: **byte-identical**. NVRMFB has no script upstream; it is `kexts/NVRMFB/fb`
+    with NVAccel's flags (`kexts/NVRM/fb` is an older copy). RM's `-D` flags come from NVIDIA's Makefile run on
+    Darwin, written to the `compile_cmds.sh` that `accel_build.sh` reads.
+  - NVRMAGDC: same instructions and section sizes; only the newer `ld` places `__got` elsewhere.
+  - Translator and plugin: same exports and linked libraries.
+  - NVK: same libraries and C exports, except the RTX 50-only direct SASS entry points (`dispatch_sass_v2/v3`,
+    `sass_*_handle_v1`). The published `nvk-macos.patch` lacks them, but the plugin turns direct SASS off on any card
+    that isn't an RTX 50 before it looks for them, so this card takes the same path. NVK is built on the 610.57.04 RM
+    headers (`~/ogkm610` in the source; 615 dropped the Turing class headers it uses). The patch also needs
+    `build/rtx2060/nvk-cl-push-warning.patch`: it puts an `fprintf` into `nv_push.h`, which the OpenCL kernels
+    include, so `mesa_clc` fails. Upstream's persistent build folder probably never rebuilt `nvkcl.spv`.
+  - Toolchain, all in `~/rtx2060-build`, no sudo: rustup stable 1.99.1, bindgen 0.73.2, cbindgen 0.29.4,
+    conda-forge (micromamba) Python 3.12 + Meson 1.12.1, and LLVM/clang/libclc/llvm-spirv 22 to build `mesa_clc`
+    (NVK needs it), glslang 16.6.0.
