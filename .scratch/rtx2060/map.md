@@ -21,9 +21,8 @@ item on the 10/10 list is covered by a spec (or ruled out of scope) and nothing 
 
 - **Machine**: RTX 2060 6 GB (TU106), Ryzen 7 5700X3D, one display 2560×1440 @ 180 Hz, macOS 26 Tahoe, OpenCore.
   The stock NullMoth driver is installed through 1401; the OpenCore picker starts macOS with or without it.
-- **Working constraint (unverified on this card)**: BAR1 is 256 MB and cannot grow; Turing's resizable-BAR capability
-  usually offers 64/128/256 MB only. Upstream PR #62's author reports an RTX 2060 exposing 8 GiB, so the baseline
-  records this card's offered BAR sizes; until then, designs assume 256 MB.
+- **Working constraint**: BAR1 is 256 MB and cannot grow. This card's Resizable BAR capability offers 64/128/256 MB
+  only (mask `0x1c0`), so upstream PR #62's 8 GiB RTX 2060 does not apply here; designs assume 256 MB.
 - **Only this card matters.** Hardcoding for TU106 / 6 GB / 256 MB BAR1 is fine; a property check is used where it
   costs nothing, but no effort goes into keeping other cards working.
 - **Fork-only, never upstream.** Work lives on `H-Sami/nvidia-macos-driver`, branch `rtx2060`, pinned to upstream tag
@@ -58,6 +57,10 @@ item on the 10/10 list is covered by a spec (or ruled out of scope) and nothing 
   existing kernel RM client can sample GPUMON on a thread_call, so no daemon is needed; key choice to verify on Tahoe.
 - [The Turing video path on Tahoe](issues/09-turing-video-path.md): the right Turing codecs load and Safari is served via
   VTDecoderXPCService; -13 is harmless; gaps are VP9, CPU untiling at 4K, a first-lookup race and one encoder session.
+
+- [Write the measurement harness](issues/01-measurement-harness.md): `tools/rtx2060/run.sh` records the 10/10 list
+  into `~/rtx2060-runs/`; it needs Accessibility, Safari's Apple Events JavaScript and `--sudo` for a full run; first
+  smoke numbers: 4K H.264 decode 44 fps, Dock and Mission Control ~66 fps.
 
 ## Not yet specified
 

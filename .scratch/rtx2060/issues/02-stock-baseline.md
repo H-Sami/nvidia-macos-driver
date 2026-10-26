@@ -13,7 +13,9 @@ scrolling, video) show up in them?
 HITL, run by the owner on Tahoe:
 
 1. Update the stock driver to 2.5.5 with 1401, so the baseline matches the fork's base (`v2.5.5`). Reboot.
-2. Run the harness from [Write the measurement harness](01-measurement-harness.md) twice: once right after login
-   (cold), once after 30 minutes of normal use (warm).
+2. Do the one-time setup in `tools/rtx2060/README.md` (Accessibility, Safari's "Allow JavaScript from Apple Events").
+   Then run the harness from [Write the measurement harness](01-measurement-harness.md) twice: once right after login
+   (cold; `login-agent.sh install` also records the login itself), once after 30 minutes of normal use (warm), each
+   with `run.sh --label stock-cold|stock-warm --sudo`.
 3. Commit the result folders to `rtx2060` under `.scratch/rtx2060/baseline/`, and record here the headline numbers
    and anything that failed to measure.
